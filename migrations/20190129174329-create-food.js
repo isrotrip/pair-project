@@ -17,9 +17,6 @@ module.exports = {
       price: {
         type: Sequelize.INTEGER
       },
-      uniqueness: {
-        type: Sequelize.STRING
-      },
       rating: {
         type: Sequelize.INTEGER
       },
