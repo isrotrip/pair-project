@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     email: DataTypes.STRING,
     address: DataTypes.STRING,
-    deposit: DataTypes.NUMBER,
+    deposit: DataTypes.INTEGER,
     role: DataTypes.STRING,
     salt: DataTypes.STRING
   }, {
@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   User.associate = function(models) {
     User.hasMany(models.FoodTransaction);
+    User.belongsToMany(models.Food, {through: models.FoodTransaction, foreignKey: 'UserId'});
   };
   return User;
 };
