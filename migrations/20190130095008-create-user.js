@@ -21,7 +21,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       deposit: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
+      },
+      role: {
+        type: Sequelize.STRING
       },
       salt: {
         type: Sequelize.STRING
