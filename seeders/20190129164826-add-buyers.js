@@ -24,15 +24,16 @@ module.exports = {
         email: data[2],
         address: data[3],
         salt: data[4],
+        role:data[5],
         deposit: randomMoney,
         createdAt: new Date,
         updatedAt: new Date
       })
     });
-    return queryInterface.bulkInsert('Buyers', buyerLists);
+    return queryInterface.bulkInsert('Users', buyerLists);
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Buyers', null, {});
+    return queryInterface.bulkDelete('Users', null, {});
   }
 };

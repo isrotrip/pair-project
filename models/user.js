@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     address: DataTypes.STRING,
     deposit: DataTypes.NUMBER,
+    role: DataTypes.STRING,
     salt: DataTypes.STRING
   }, {
     hooks: {
