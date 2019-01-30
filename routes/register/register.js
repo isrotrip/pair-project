@@ -13,16 +13,14 @@ router.post('/', function (req, res) {
         address: req.body.address,
         deposit: req.body.deposit
     }
-    Model.Buyer.create(databaru)
+    Model.User.create(databaru)
         .then(function (data) {
-            // res.send(data)
             res.redirect('/')
 
         })
         .catch(function (err) {
             res.send('NOT FOUND')
         })
-    // res.send(data)
 })
 
 

@@ -8,7 +8,6 @@ router.get('/', (req,res) => {
     .Food
     .findAll()
     .then(foods => {
-      res.send(req.session.userLogIn)
       res.render('./home/index.ejs', {err: err, msg: msg});
     })
     .catch(err => {
