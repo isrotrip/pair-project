@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     uniqueness: DataTypes.STRING,
     rating: DataTypes.INTEGER
   }, {});
-  Food.associate = function(models) {
+  Food.associate = function (models) {
     // associations can be defined here
   };
   return Food;
