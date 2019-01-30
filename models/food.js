@@ -7,9 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     rating: DataTypes.INTEGER
   }, {});
   Food.associate = function (models) {
-    Food.hasMany(models.FoodTransaction);
-    Food.belongsToMany(models.User, {through: models.FoodTransaction, foreignKey: 'FoodId'});
-    Food.belongsToMany(models.Tag, {through: models.Foodtag, foreignKey: 'foodId'});
+    // associations can be defined here
   };
   return Food;
 };

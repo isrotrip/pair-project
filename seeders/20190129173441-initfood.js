@@ -13,6 +13,7 @@ module.exports = {
         name: data[i][0],
         originMadeFrom: data[i][1],
         price: data[i][2],
+        uniqueness: data[i][3],
         rating: 0,
         createdAt: new Date(),
         updatedAt: new Date()

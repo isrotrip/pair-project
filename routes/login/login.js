@@ -11,7 +11,7 @@ router
   })
   .post((req, res, next) => {
     Model
-      .User
+      .Buyer
       .findOne({where: {username: req.body.username}})
       .then(user => {
         if(user){
