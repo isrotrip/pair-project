@@ -6,23 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>@dang Register</title>
+  <%- include('../partials/cssNavBar.ejs') %>
 </head>
 
 <body>
+  <%- include('../partials/notif.ejs') %>
+  <%- include('../partials/navBar.ejs') %>
   @dang Register
-  <h1>register </h1>
+  <h1> Register </h1>
   <form action="/register" method="POST">
     <br>
     username: <input type="text" name="username">
     <br>
     password: <input type="text" name="password">
     <br>
-    email: <input type="text" name="email">
-    <br>
-    address: <input type="text" name="address">
-    <br>
-    deposit: <input type="text" name="deposit">
-    <button type="submit">Masukkan</button>
+    <button type="submit">Submit</button>
   </form>
 
 </body>

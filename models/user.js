@@ -1,5 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
+  const Op = sequelize.Op;
   const User = sequelize.define('User', {
     username: DataTypes.STRING,
     password: DataTypes.STRING,
@@ -11,14 +12,34 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks: {
       beforeValidate:(user, options) => {
-        let secret = (Math.floor(Math.random()*10000)+1).toString();
-        const hash =
-        crypto
-          .createHmac('sha256', secret)
-          .update(`${user.password}`)
-          .digest('hex');
-        user.password = hash;
-        user.salt = secret;
+        return User
+          .findOne({where: {id: {[Op.ne]: user.id}, email: user.email}})
+          .then(data => {
+            if(data){
+              throw new Err('email sudah terdaftar!');
+            }
+            else {
+              return User.findOne({where: {id: {[Op.ne]: user.id}, username: user.username}});
+            }
+          })
+          .then(data => {
+            if(data){
+              throw new Err('username sudah terdaftar!');
+            }
+            else {
+              let secret = (Math.floor(Math.random()*10000)+1).toString();
+              const hash =
+              crypto
+                .createHmac('sha256', secret)
+                .update(`${user.password}`)
+                .digest('hex');
+              user.password = hash;
+              user.salt = secret;
+            }
+          })
+          .catch(err => {
+            throw err;
+          })
       }
     }
   });

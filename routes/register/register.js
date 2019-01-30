@@ -2,24 +2,22 @@ const router = require('express').Router();
 const Model = require('../../models');
 
 router.get('/', (req, res) => {
-    res.render('./register/register.ejs')
+    let err = req.query.error ? req.query.error : undefined;
+    let msg = req.query.msg ? req.query.msg : undefined;
+    res.render('./register/register.ejs', {err: err, msg: msg});
 })
 
 router.post('/', function (req, res) {
     let databaru = {
         username: req.body.username,
-        password: req.body.password,
-        email: req.body.email,
-        address: req.body.address,
-        deposit: req.body.deposit
+        password: req.body.password
     }
     Model.User.create(databaru)
         .then(function (data) {
-            res.redirect('/')
-
+            res.redirect('/?msg=Register Success!');
         })
         .catch(function (err) {
-            res.send('NOT FOUND')
+            res.redirect(`/register/?error=${err}`);
         })
 })
 
