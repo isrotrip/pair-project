@@ -8,9 +8,22 @@ module.exports = (sequelize, DataTypes) => {
     deposit: DataTypes.NUMBER,
     role: DataTypes.STRING,
     salt: DataTypes.STRING
-  }, {});
+  }, {
+    hooks: {
+      beforeValidate:(user, options) => {
+        let secret = (Math.floor(Math.random()*10000)+1).toString();
+        const hash =
+        crypto
+          .createHmac('sha256', secret)
+          .update(`${user.password}`)
+          .digest('hex');
+        user.password = hash;
+        user.salt = secret;
+      }
+    }
+  });
   User.associate = function(models) {
-    // associations can be defined here
+    User.hasMany(models.FoodTransaction);
   };
   return User;
 };
