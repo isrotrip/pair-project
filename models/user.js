@@ -1,13 +1,12 @@
 'use strict';
-const crypto = require('crypto');
-
 module.exports = (sequelize, DataTypes) => {
-  const Buyer = sequelize.define('Buyer', {
+  const User = sequelize.define('User', {
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     email: DataTypes.STRING,
     address: DataTypes.STRING,
-    deposit: DataTypes.INTEGER,
+    deposit: DataTypes.NUMBER,
+    role: DataTypes.STRING,
     salt: DataTypes.STRING
   }, {
     hooks: {
@@ -23,10 +22,8 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
-
-  Buyer.associate = function(models) {
-    Buyer.hasMany(models.FoodTransaction);
+  User.associate = function(models) {
+    User.hasMany(models.FoodTransaction);
   };
-  
-  return Buyer;
+  return User;
 };

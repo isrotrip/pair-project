@@ -2,10 +2,10 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.addColumn('Buyers', 'salt', Sequelize.INTEGER);
+    return queryInterface.addColumn('Users', 'salt', Sequelize.INTEGER);
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.removeColumn('Buyers', 'salt', Sequelize.INTEGER);
+    return queryInterface.removeColumn('Users', 'salt', Sequelize.INTEGER);
   }
 };
