@@ -1,10 +1,18 @@
 'use strict';
+const crypto = require('crypto')
+
 module.exports = (sequelize, DataTypes) => {
   const Op = sequelize.Op;
   const User = sequelize.define('User', {
     username: DataTypes.STRING,
     password: DataTypes.STRING,
-    email: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      isEmail: {
+        args: true,
+        msg: 'email format is wrong!'
+      }
+    },
     address: DataTypes.STRING,
     deposit: DataTypes.INTEGER,
     role: DataTypes.STRING,
@@ -12,11 +20,17 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks: {
       beforeValidate:(user, options) => {
+        if(user.username.length < 6 && user.username.length > 20){
+          return new Error('password must have 6 - 20 length');
+        }
+        if(user.email.length > 30 && user.email.length < 8){
+          return new Error ('password must have 8 - 30 length');
+        }
         return User
           .findOne({where: {id: {[Op.ne]: user.id}, email: user.email}})
           .then(data => {
             if(data){
-              throw new Err('email sudah terdaftar!');
+              throw 'email have been already taken!';
             }
             else {
               return User.findOne({where: {id: {[Op.ne]: user.id}, username: user.username}});
@@ -24,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
           })
           .then(data => {
             if(data){
-              throw new Err('username sudah terdaftar!');
+              throw 'username have been already taken!';
             }
             else {
               let secret = (Math.floor(Math.random()*10000)+1).toString();

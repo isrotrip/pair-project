@@ -8,9 +8,14 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', function (req, res) {
+    console.log(req.body.email)
     let databaru = {
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        email: req.body.email,
+        address: req.body.address,
+        deposit: 0,
+        role: 'buyer'
     }
     Model.User.create(databaru)
         .then(function (data) {
