@@ -4,7 +4,6 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     originMadeFrom: DataTypes.STRING,
     price: DataTypes.INTEGER,
-    uniqueness: DataTypes.STRING,
     rating: DataTypes.INTEGER
   }, {});
   Food.associate = function (models) {
