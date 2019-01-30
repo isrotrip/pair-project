@@ -7,8 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
 
   FoodTransaction.associate = function(models) {
-    FoodTransaction.belongsTo(models.User)
-    FoodTransaction.belongsTo(models.Food)
+    FoodTransaction.belongsTo(models.Buyer)
   };
 
   return FoodTransaction;
