@@ -1,12 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>@dang Check Transaction</title>
+  <title>@dang Home</title>
+  <%- include('../partials/cssNavBar.ejs') %>
 </head>
+
 <body>
-  @dang Check Transaction
+  <%- include('../partials/navBar.ejs') %>
+  <h1> DATA FOODS</h1>
+
+  <br>
+  <h3>daftar beli</h3>
+
+  <br>
+  <table border="2">
+    <tr>
+      <td>id</td>
+      <td>FoodId</td>
+      <td>BuyerId</td>
+      <td>buyerRating</td>
+      <td>amount</td>
+    </tr>
+    <% data.forEach(e =>{ %>
+    <tr>
+
+    <tr>
+      <td>
+        <%= e.id%>
+      </td>
+      <td>
+        <%= e.FoodId%>
+      </td>
+      <td>
+        <%= e.BuyerId%>
+      </td>
+      <td>
+        <%= e.buyerRating %>
+      </td>
+      <td>
+        <%= e.amount %>
+      </td>
+
+
+
+    </tr>
+    <% })%>
+
+  </table>
+  <a id="" href="/">home</a>
+
 </body>
-</html>
