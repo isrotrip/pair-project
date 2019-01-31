@@ -10,6 +10,7 @@ const deposit = require('./routes/deposit/deposit.js');
 const editUser = require('./routes/editUser/editUser.js');
 const checkTransaction = require('./routes/checkTransaction/checkTransaction.js');
 const logout = require('./routes/logout/logout.js');
+const foods = require('./routes/food/food.js');
 
 //req helpers
 const checkAvailable = require('./helpers/checkAvailable.js');
@@ -29,6 +30,7 @@ app.use('/', home);
 app.use('/login', login);
 app.use('/register', register);
 app.use('/buy', buy);
+app.use('/foods', foods);
 app.use('/deposit', deposit);
 app.use('/editUser', editUser);
 app.use('/checkTransaction', checkTransaction);
