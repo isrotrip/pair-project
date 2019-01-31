@@ -10,10 +10,11 @@ router.get('/', (req,res) => {
     .then(foods => {
       let uniqueObj = {};
         foods.forEach(food => {
-          uniqueObj[food.originMadeFrom] = 0;
+          uniqueObj[food.originMadeFrom] ? uniqueObj[food.originMadeFrom]++ : uniqueObj[food.originMadeFrom] = 1;
         })
       const filter = Object.keys(uniqueObj);
-      res.render('./home/index.ejs', {err: err, msg: msg, data: foods, filter: filter, selected: undefined});
+      const values = Object.values(uniqueObj);
+      res.render('./home/index.ejs', {err: err, msg: msg, data: foods, filter: filter, selected: undefined, values: values});
     })
     .catch(err => {
       res.send(err);

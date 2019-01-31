@@ -17,10 +17,11 @@ router.post('/', (req, res) => {
     .then(foods => {
       let uniqueObj = {};
         foods.forEach(food => {
-          uniqueObj[food.originMadeFrom] = 0;
+          uniqueObj[food.originMadeFrom] ? uniqueObj[food.originMadeFrom]++ : uniqueObj[food.originMadeFrom] = 1;
         })
       const filter = Object.keys(uniqueObj);
-      res.render('./home/index.ejs', {err: err, msg: msg, data: filteredFoods, filter: filter, selected : req.body.type});
+      const values = Object.values(uniqueObj);
+      res.render('./home/index.ejs', {err: err, msg: msg, data: filteredFoods, filter: filter, selected : values});
     })
     .catch(err => {
       res.send(err);
