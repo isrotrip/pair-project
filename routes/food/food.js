@@ -24,7 +24,7 @@ router.get('/edit/:id', function (req, res) {
 
         })
         .catch(function (err) {
-            res.send('NOT FOUND')
+            res.send(err)
         })
 })
 

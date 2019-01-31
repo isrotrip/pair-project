@@ -1,10 +1,15 @@
-<head>
-
-
-
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@dang Home</title>
+    <%- include('../partials/cssNavBar.ejs') %>
 </head>
 
 <body>
+    <%- include('../partials/navBar.ejs') %>
     <h1> DATA FOODS</h1>
     <a id="add" href="foods/add">add food </a>
     <br>
@@ -14,7 +19,6 @@
             <td>name</td>
             <td>origin</td>
             <td>prince</td>
-            <td>uniqueness</td>
             <td>rating</td>
             <td>option</td>
 
@@ -34,9 +38,6 @@
             </td>
             <td>
                 <%= e.price %>
-            </td>
-            <td>
-                <%= e.uniqueness %>
             </td>
             <td>
                 <%= e.rating %>
