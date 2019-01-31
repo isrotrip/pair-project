@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Deposit List</title>
+    <%- include('../partials/cssNavBar.ejs') %>
+</head>
+
+<body>
+    <%- include('../partials/notif.ejs') %>
+    <%- include('../partials/navBar.ejs') %>
+    <table border="2">
+        <tr>
+            <td>id</td>
+            <td>username</td>
+            <td>deposit</td>
+            <td>add deposit</td>
+
+        </tr>
+        <% buyers.forEach(e =>{ %>
+        <tr>
+
+        <tr>
+            <td>
+                <%= e.id%>
+            </td>
+            <td>
+                <%= e.username%>
+            </td>
+            <td>
+                <%= e.deposit%>
+            </td>
+            <td>
+                <a href="/deposit/<%= e.id%>">Add Deposit</a>
+            </td>
+        </tr>
+        <% })%>
+
+    </table>
+
+
+</body>

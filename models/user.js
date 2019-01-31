@@ -20,12 +20,16 @@ module.exports = (sequelize, DataTypes) => {
   }, {
       hooks: {
         beforeValidate: (user, options) => {
-          if (user.username.length < 6 && user.username.length > 20) {
-            return new Error('password must have 6 - 20 length');
+          if(!user.username || !user.password || !user.email){
+            return user;
           }
-          if (user.email.length > 30 && user.email.length < 8) {
-            return new Error('password must have 8 - 30 length');
+          if (user.username.length < 2 && user.username.length > 20) {
+            return new Error('username must have 2 - 20 length');
           }
+          if (user.email.length > 30 && user.email.length < 3) {
+            return new Error('password must have 3 - 30 length');
+          }
+          
           return User
             .findOne({ where: { id: { [Op.ne]: user.id }, email: user.email } })
             .then(data => {
@@ -45,39 +49,40 @@ module.exports = (sequelize, DataTypes) => {
               }
             })
             .then(data => {
-              let secret = '';
               if (data.salt) {
-                secret = data.salt;
+                return user;
               }
               else {
-                secret = (Math.floor(Math.random() * 10000) + 1).toString();
+                let secret = (Math.floor(Math.random() * 10000) + 1).toString();
+                const hash =
+                  crypto
+                    .createHmac('sha256', secret)
+                    .update(`${user.password}`)
+                    .digest('hex');
+                user.password = hash;
+                user.salt = secret;
+                return user;
               }
 
-              const hash =
-                crypto
-                  .createHmac('sha256', secret)
-                  .update(`${user.password}`)
-                  .digest('hex');
-              user.password = hash;
-              user.salt = secret;
             })
             .catch(err => {
               throw err;
             })
-        },
-        afterValidate: (user, options) => {
-          return Model.User.findOne()
-            .then(function (data) {
-              console.log(data.password, user.password)
-              if (data.password !== user.password) {
-                throw 'wrong password'
-              }
-            })
-            .catch(function (err) {
-              throw err
-            })
-
         }
+        // ,
+        // afterValidate: (user, options) => {
+        //   return Model.User.findOne()
+        //     .then(function (data) {
+        //       console.log(data.password, user.password)
+        //       if (data.password !== user.password) {
+        //         throw 'wrong password'
+        //       }
+        //     })
+        //     .catch(function (err) {
+        //       throw err
+        //     })
+
+        // }
 
 
       }

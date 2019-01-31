@@ -1,8 +1,38 @@
 const router = require('express').Router();
 const Model = require('../../models');
+const isOwner = require('../../helpers/userRole');
 
-router.get('/:id', (req, res) => {
-    // res.send('ok')
+
+router.get('/', (req, res, next) => {
+    if(isOwner(req.session.userLogIn, 'owner')){
+        next()
+    }
+    else {
+        res.redirect('/?error=only owner who can access deposits'); 
+    }
+    },
+    (req, res) => {
+        let err = req.query.error ? req.query.error : undefined;
+        let msg = req.query.msg ? req.query.msg : undefined;
+        Model
+          .User
+          .findAll({where: {role: 'buyer'}})
+          .then(buyers => {
+              res.render('./deposit/deposit-list.ejs', {buyers: buyers, err: err, msg: msg})
+          })
+          .catch(err => {
+              res.send(err);
+          });
+    })
+
+router.get('/:id', (req, res, next) => {
+    if(isOwner(req.session.userLogIn, 'owner')){
+        next()
+    }
+    else {
+        res.redirect('/?error=only owner who can access deposits'); 
+    }}, 
+    (req, res)  => {
     Model.User.findOne({
         where: {
             id: req.params.id
@@ -10,30 +40,28 @@ router.get('/:id', (req, res) => {
     })
         .then(function (datas) {
             res.render('./deposit/deposit.ejs', { data: [datas] })
-            // res.send(datas)
-        })
-        .catch(function (err) {
-            res.send('NOT FOUND')
-        })
-})
-
-router.post('/:id', function (req, res) {
-    var dataUser = {
-        deposit: Number(req.body.deposit)
-    }
-    Model.User.update(dataUser, {
-        where: {
-            id: req.params.id
-        }
-    })
-        .then(function () {
-
-            res.send('ok')
         })
         .catch(function (err) {
             res.send(err)
         })
-    // res.send(dataUser)
+})
+
+router.post('/:id', function (req, res) {
+    Model.User.findOne({
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(function (user) {
+        const update = {deposit: (user.deposit + Number(req.body.deposit))}
+        return Model.User.update(update, {where:{id: user.id}});
+    })
+    .then(() => {
+        res.redirect('/deposit/?msg=deposit added successfully');
+    })
+    .catch(function (err) {
+        res.send(err)
+    })
 })
 
 

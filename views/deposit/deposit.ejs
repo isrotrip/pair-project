@@ -6,16 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>@dang Edit User</title>
+  <%- include('../partials/cssNavBar.ejs') %>
 </head>
 
 <body>
+  <%- include('../partials/navBar.ejs') %>
   @dang Edit deposit
   <% data.forEach(e =>{ %>
-  <form action="/deposit/<%= e.id %>" method="POST">
+  <form method="POST">
     <br>
-    Deposit : <input type="text" name="deposit" value="<%= e.deposit %>">
+    Deposit : <input type="text" name="deposit">
     <br>
-    <button type="submit">Masukkan</button>
+    <input type="submit" value ="Masukkan"></input>
     <% })%>
   </form>
 </body>
