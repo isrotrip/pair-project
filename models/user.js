@@ -6,13 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     username: DataTypes.STRING,
     password: DataTypes.STRING,
-    email: {
-      type: DataTypes.STRING,
-      isEmail: {
-        args: true,
-        msg: 'email format is wrong!'
-      }
-    },
+    email: DataTypes.STRING,
     address: DataTypes.STRING,
     deposit: DataTypes.INTEGER,
     role: DataTypes.STRING,
@@ -20,9 +14,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
       hooks: {
         beforeValidate: (user, options) => {
-          if(!user.username || !user.password || !user.email){
-            return user;
-          }
           if (user.username.length < 2 && user.username.length > 20) {
             return new Error('username must have 2 - 20 length');
           }
@@ -45,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
                 throw 'username have been already taken!';
               }
               else {
-                return user.findOne({ where: { id: user.id } })
+                return User.findOne({ where: { id: user.id } })
               }
             })
             .then(data => {

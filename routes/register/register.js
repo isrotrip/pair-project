@@ -8,7 +8,6 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', function (req, res) {
-    console.log(req.body.email)
     let databaru = {
         username: req.body.username,
         password: req.body.password,
