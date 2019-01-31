@@ -11,10 +11,10 @@ module.exports = {
       FoodId: {
         type: Sequelize.INTEGER
       },
-      BuyerId: {
+      UserId: {
         type: Sequelize.INTEGER
       },
-      buyerRating: {
+      userRating: {
         type: Sequelize.INTEGER
       },
       createdAt: {
