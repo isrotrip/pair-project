@@ -1,21 +1,18 @@
-var express = require('express')
-const app = express()
-var router = express.Router()
-const ejs = require('ejs')
-app.set('view engine', 'ejs')
-const Model = require('../models')
+const express = require('express');
+const router = express.Router();
+const Model = require('../../models');
 
-router.get('/foods', function (req, res) {
+router.get('/', function (req, res) {
     Model.Food.findAll({ order: [['id']] })
         .then(function (data) {
-            // res.send(data)
-            res.render('allfoods.ejs', { data: data })
+            res.render('./food/allfoods.ejs', { data: data })
         })
         .catch(function (err) {
-            res.send('NOT FOUND')
+            res.send(err)
         })
 })
-router.get('/foods/edit/:id', function (req, res) {
+
+router.get('/edit/:id', function (req, res) {
     Model.Food.findOne({
         where: {
             id: req.params.id
@@ -23,7 +20,7 @@ router.get('/foods/edit/:id', function (req, res) {
     })
         .then(function (datas) {
 
-            res.render('idfoods.ejs', { data: [datas] })
+            res.render('./food/idfoods.ejs', { data: [datas] })
 
         })
         .catch(function (err) {
@@ -32,9 +29,8 @@ router.get('/foods/edit/:id', function (req, res) {
 })
 
 
-router.post('/foods/edit/:id', function (req, res) {
+router.post('/edit/:id', function (req, res) {
     var datafoods = {
-        // FirstName: req.body.FirstName,
         name: req.body.name,
         originMadeFrom: req.body.originMadeFrom,
         price: req.body.price,
@@ -50,11 +46,11 @@ router.post('/foods/edit/:id', function (req, res) {
             res.redirect('/foods')
         })
         .catch(function (err) {
-            res.send('tidak valid')
+            res.send(err)
         })
-    // res.send(datateachers)
 })
-router.get('/foods/delete/:id', function (req, res) {
+
+router.get('/delete/:id', function (req, res) {
     Model.Food.destroy({
         where: {
             id: req.params.id
@@ -64,17 +60,16 @@ router.get('/foods/delete/:id', function (req, res) {
             res.redirect('/foods')
         })
         .catch(function (err) {
-            res.send('NOT FOUND')
+            res.send(err)
         })
 })
 
-router.get('/foods/add', function (req, res) {
-
-    res.render('addfoods.ejs')
+router.get('/add', function (req, res) {
+    res.render('./food/addfoods.ejs')
 })
 
 
-router.post('/foods/add', function (req, res) {
+router.post('/add', function (req, res) {
     var fooddata = {
         name: req.body.name,
         originMadeFrom: req.body.originMadeFrom,
@@ -88,11 +83,8 @@ router.post('/foods/add', function (req, res) {
             res.redirect('/foods')
         })
         .catch(function (err) {
-            res.send('NOT FOUND')
+            res.send(err)
         })
-    // res.send(fooddata)
 })
-
-
 
 module.exports = router
