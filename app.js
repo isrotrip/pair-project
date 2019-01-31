@@ -14,6 +14,7 @@ const foods = require('./routes/food/food.js');
 
 //req helpers
 const checkAvailable = require('./helpers/checkAvailable.js');
+const userLogin = require('./helpers/userLogIn.js')
 
 const app = express();
 const port = 3000;
@@ -24,6 +25,7 @@ app.use(session({'secret': 'hacktiv8'}));
 
 //set helpers
 app.locals.checkAvailable = checkAvailable;
+app.locals.userLogin = userLogin;
 
 //use routes
 app.use('/', home);
