@@ -17,23 +17,22 @@ module.exports = {
           .update(data[1])
           .digest('hex');
         data[1] = hash;
-        data[5] = secret;
+        data[4] = secret;
       buyerLists.push({ 
         username: data[0],
         password: data[1],
         email: data[2],
         address: data[3],
-        salt: data[5],
-        role:data[4],
+        salt: data[4],
         deposit: randomMoney,
         createdAt: new Date,
         updatedAt: new Date
       })
     });
-    return queryInterface.bulkInsert('Users', buyerLists);
+    return queryInterface.bulkInsert('Buyers', buyerLists);
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Users', null, {});
+    return queryInterface.bulkDelete('Buyers', null, {});
   }
 };
