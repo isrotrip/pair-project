@@ -9,6 +9,7 @@ const buy = require('./routes/buy/buy.js');
 const deposit = require('./routes/deposit/deposit.js');
 const editUser = require('./routes/editUser/editUser.js');
 const checkTransaction = require('./routes/checkTransaction/checkTransaction.js');
+const logout = require('./routes/logout/logout.js');
 
 //req helpers
 const checkAvailable = require('./helpers/checkAvailable.js');
@@ -31,6 +32,7 @@ app.use('/buy', buy);
 app.use('/deposit', deposit);
 app.use('/editUser', editUser);
 app.use('/checkTransaction', checkTransaction);
+app.use('/logout', logout);
 
 app.listen(port, () => {
   console.log(`the connection is on the port ${port}`);
