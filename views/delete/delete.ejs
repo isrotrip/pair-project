@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@dang Delete Page</title>
+    <%- include('../partials/cssNavBar.ejs') %>
+</head>
+
+<body>
+    <%- include('../partials/navBar.ejs') %>
+    <h1> Delete User</h1>
+    <br>
+    <table border="2">
+        <tr>
+            <th>id</th>
+            <th>user name</th>
+            <th>email</th>
+            <th>addres</th>
+            <th>deposit</th>
+            <th>actions</th>
+
+
+        </tr>
+        <tr>
+
+        <tr>
+            <td>
+                <%= data.id%>
+            </td>
+            <td>
+                <%= data.username%>
+            </td>
+            <td>
+                <%= data.email%>
+            </td>
+            <td>
+                <%= data.address %>
+            </td>
+            <td>
+                <%= data.deposit %>
+            </td>
+
+
+            <td>
+              <form method="POST">
+                <input type ="submit" value="delete"> 
+              </form>
+           
+            </td>
+        </tr>
+
+    </table>
+
+
+</body>
