@@ -24,7 +24,9 @@
       <td>origin</td>
       <td>prince</td>
       <td>rating</td>
-      <td>option</td>
+      <td>amount</td>
+      <td>rating</td>
+      <td>buy</td>
 
     </tr>
     <% data.forEach(e =>{ %>
@@ -46,11 +48,18 @@
       <td>
         <%= e.rating %>
       </td>
-
-
-      <td>
-        <a id="add" href="buy/<%= e.id%>">add |</a>
-      </td>
+      <form action="/buy/<%=e.id%>"  method="POST">
+        <td>
+          <input type="text" name="amount" min="0" value="0">
+        </td>
+        <td>
+          <input type="number" min="0" max="5" name="rating" value="0">
+        </td>
+        <td>
+          <input type="submit" value="buy">
+        </td>
+      </form>
+      
     </tr>
     <% })%>
 

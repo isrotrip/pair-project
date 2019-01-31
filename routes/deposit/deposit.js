@@ -8,7 +8,7 @@ router.get('/', (req, res, next) => {
         next()
     }
     else {
-        res.redirect('/?error=only owner who can access deposits'); 
+        res.redirect('/?error=Only owners who can access deposits'); 
     }
     },
     (req, res) => {
@@ -30,7 +30,7 @@ router.get('/:id', (req, res, next) => {
         next()
     }
     else {
-        res.redirect('/?error=only owner who can access deposits'); 
+        res.redirect('/?error=Only owners who can access deposits'); 
     }}, 
     (req, res)  => {
     Model.User.findOne({

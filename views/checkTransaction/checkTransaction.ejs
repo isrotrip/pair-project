@@ -19,10 +19,9 @@
   <br>
   <table border="2">
     <tr>
-      <td>id</td>
       <td>FoodId</td>
-      <td>BuyerId</td>
-      <td>buyerRating</td>
+      <td>UserId</td>
+      <td>userRating</td>
       <td>amount</td>
     </tr>
     <% data.forEach(e =>{ %>
@@ -30,16 +29,13 @@
 
     <tr>
       <td>
-        <%= e.id%>
-      </td>
-      <td>
         <%= e.FoodId%>
       </td>
       <td>
-        <%= e.BuyerId%>
+        <%= e.UserId%>
       </td>
       <td>
-        <%= e.buyerRating %>
+        <%= e.userRating %>
       </td>
       <td>
         <%= e.amount %>
