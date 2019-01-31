@@ -40,7 +40,17 @@ module.exports = (sequelize, DataTypes) => {
               }
             })
             .then(data => {
-                if(!data.salt){
+                if(!data){
+                  let secret = (Math.floor(Math.random() * 10000) + 1).toString();
+                const hash =
+                  crypto
+                    .createHmac('sha256', secret.toString())
+                    .update(`${user.password}`)
+                    .digest('hex');
+                user.password = hash;
+                user.salt = secret;  
+                }
+                else if(!data.salt){
                   let secret = (Math.floor(Math.random() * 10000) + 1).toString();
                 const hash =
                   crypto

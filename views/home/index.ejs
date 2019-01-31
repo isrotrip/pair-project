@@ -11,8 +11,9 @@
     <%- include('../partials/notif.ejs') %>
     <%- include('../partials/navBar.ejs') %>
     @dang Home
-  </body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
   <div style="width:200px; height: 200px;">
     <canvas id="myChart"></canvas>
   </div>
@@ -57,4 +58,51 @@ var myChart = new Chart(ctx, {
 }
 });
 </script>
+    <form action="/filter" method="POST">
+        <select name="type">
+            <%filter.forEach(el=>{%>               
+                <%if(el === selected){%>
+                <option value="<%=el%>"><%=el%></option>
+                <%}else{%>
+                <option value="<%=el%>"><%=el%></option>
+            <% }})%>
+        </select>
+        <input type="submit" value="go"> 
+    </form>
+    <table border="2">
+        <tr>
+            <td>id</td>
+            <td>name</td>
+            <td>origin</td>
+            <td>prince</td>
+            <td>rating</td>
+
+        </tr>
+        <% data.forEach(e =>{ %>
+        <tr>
+
+        <tr>
+            <td>
+                <%= e.id%>
+            </td>
+            <td>
+                <%= e.name%>
+            </td>
+            <td>
+                <%= e.originMadeFrom%>
+            </td>
+            <td>
+                <%= e.price %>
+            </td>
+            <td>
+                <%= e.rating %>
+            </td>
+
+        </tr>
+        <% })%>
+
+    </table>
+
+  </body>
+  
 </html>

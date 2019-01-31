@@ -65,6 +65,7 @@ router.post('/:id', function (req, res, next) {
             return thisFood.update({rating: averageRating/foodtransactions.length});
         })
         .then(() => {
+            req.session.userLogIn.deposit = totalTransaction
             res.redirect('/buy/?msg=Sukses membeli makanan')
         })
         .catch(function (err) {
