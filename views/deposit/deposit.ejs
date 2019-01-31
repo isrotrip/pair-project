@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>@dang Deposit</title>
+  <title>@dang Edit User</title>
 </head>
+
 <body>
-  @dang Deposit
+  @dang Edit deposit
+  <% data.forEach(e =>{ %>
+  <form action="/deposit/<%= e.id %>" method="POST">
+    <br>
+    Deposit : <input type="text" name="deposit" value="<%= e.deposit %>">
+    <br>
+    <button type="submit">Masukkan</button>
+    <% })%>
+  </form>
 </body>
+
 </html>
