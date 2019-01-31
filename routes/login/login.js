@@ -5,6 +5,9 @@ const crypto = require('crypto');
 router
   .route('/')
   .get((req, res) => {
+    if(req.session.userLogIn){
+      res.redirect('/?error=You have login');
+    }
     let err = req.query.error ? req.query.error : undefined;
     let msg = req.query.msg ? req.query.msg : undefined;
     res.render('./login/login.ejs', {err: err, msg: msg});

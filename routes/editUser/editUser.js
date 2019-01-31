@@ -1,11 +1,18 @@
 const router = require('express').Router();
 const Model = require('../../models');
+const isOwner = require('../../helpers/userRole');
 
-router.get('/:id', function (req, res) {
-    // res.send('ok')
+router.get('/', (req, res, next) => {
+    if(req.session.userLogIn){
+        next()
+    }
+    else {
+        res.redirect('/?error=you must login first'); 
+    }    
+    }, (req, res) => {
     Model.User.findOne({
         where: {
-            id: req.params.id
+            id: req.session.userLogIn.id
         }
     })
         .then(function (datas) {
@@ -13,33 +20,28 @@ router.get('/:id', function (req, res) {
             // res.send(datas)
         })
         .catch(function (err) {
-            res.send('NOT FOUND')
+            res.send(err)
         })
 })
 
 router.post('/:id', function (req, res) {
-    var dataUser = {
+    const dataUser = {
         username: req.body.username,
         password: req.body.password,
         email: req.body.email,
-        address: req.body.address,
-        newpassword: req.body.newpassword,
+        address: req.body.address
     }
-    Model.User.findOne({
-        where: {
-            id: req.params.id
-        }
-    })
-        .then(function (data) {
-            return Model.User.update(dataUser)
-            // res.send(data)
-        })
-        .then(function (data) {
-            res.send('masuk')
+    Model.User.checkPassword(req.body.password, req.session.userLogIn.id)
+        .then(function (status) {
+            if(status){
+                dataUser.password = req.body.newpassword;
+                Model.User.update(dataUser, {where: {id: req.session.userLogIn.id}})
+            }
         })
         .catch(function (err) {
             res.send(err)
         })
+        //c5de18
     // res.send(dataUser)
 })
 
