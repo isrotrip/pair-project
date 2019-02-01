@@ -36,6 +36,4 @@ app.use('/editUser', editUser);
 app.use('/checkTransaction', checkTransaction);
 app.use('/logout', logout);
 
-app.listen(port, () => {
-  console.log(`the connection is on the port ${port}`);
-})
+app.listen(process.env.PORT || '3000')
