@@ -2,8 +2,8 @@
 module.exports = (sequelize, DataTypes) => {
   const FoodTransaction = sequelize.define('FoodTransaction', {
     FoodId: DataTypes.INTEGER,
-    BuyerId: DataTypes.INTEGER,
-    buyerRating: DataTypes.INTEGER,
+    UserId: DataTypes.INTEGER,
+    userRating: DataTypes.INTEGER,
     amount: DataTypes.INTEGER
   }, {});
 

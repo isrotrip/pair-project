@@ -2,7 +2,19 @@ const express = require('express');
 const router = express.Router();
 const Model = require('../../models');
 
-router.get('/', function (req, res) {
+router.get('/', (req, res, next) => {
+    if(req.session.userLogIn){
+        if(req.session.userLogIn.role === 'owner'){
+            next();
+        }
+        else{
+            res.redirect('/?error=Only owners that can access this feature');
+        }
+    }
+    else{
+        res.redirect('/?error=Only owner that can access this feature');
+    }
+    }, function (req, res) {
     Model.Food.findAll({ order: [['id']] })
         .then(function (data) {
             res.render('./food/allfoods.ejs', { data: data })

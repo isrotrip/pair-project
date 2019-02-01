@@ -8,7 +8,7 @@ router.get('/', (req, res, next) => {
         next()
     }
     else {
-        res.redirect('/?error=only owner who can access deposits'); 
+        res.redirect('/?error=Only owners who can access deposits'); 
     }
     },
     (req, res) => {
@@ -30,7 +30,7 @@ router.get('/:id', (req, res, next) => {
         next()
     }
     else {
-        res.redirect('/?error=only owner who can access deposits'); 
+        res.redirect('/?error=Only owners who can access deposits'); 
     }}, 
     (req, res)  => {
     Model.User.findOne({
@@ -53,8 +53,8 @@ router.post('/:id', function (req, res) {
         }
     })
     .then(function (user) {
-        const update = {deposit: (user.deposit + Number(req.body.deposit))}
-        return Model.User.update(update, {where:{id: user.id}});
+        user.deposit = (user.deposit + Number(req.body.deposit));
+        return user.save();
     })
     .then(() => {
         res.redirect('/deposit/?msg=deposit added successfully');

@@ -11,5 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     Food.belongsToMany(models.User, {through: models.FoodTransaction, foreignKey: 'FoodId'});
     Food.belongsToMany(models.Tag, {through: models.Foodtag, foreignKey: 'foodId'});
   };
+
+
   return Food;
 };

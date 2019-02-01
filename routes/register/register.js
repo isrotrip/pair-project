@@ -1,7 +1,14 @@
 const router = require('express').Router();
 const Model = require('../../models');
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
+    if(!req.session.userLogIn){
+        next();
+    }
+    else{
+        res.redirect('/?error=You must log out first');
+    }
+    }, (req, res) => {
     let err = req.query.error ? req.query.error : undefined;
     let msg = req.query.msg ? req.query.msg : undefined;
     res.render('./register/register.ejs', {err: err, msg: msg});

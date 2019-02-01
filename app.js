@@ -11,6 +11,8 @@ const editUser = require('./routes/editUser/editUser.js');
 const checkTransaction = require('./routes/checkTransaction/checkTransaction.js');
 const logout = require('./routes/logout/logout.js');
 const foods = require('./routes/food/food.js');
+const del = require('./routes/delete/delete.js');
+const filter = require('./routes/filter/filter.js');
 
 //req helpers
 const checkAvailable = require('./helpers/checkAvailable.js');
@@ -35,5 +37,7 @@ app.use('/deposit', deposit);
 app.use('/editUser', editUser);
 app.use('/checkTransaction', checkTransaction);
 app.use('/logout', logout);
+app.use('/delete', del);
+app.use('/filter', filter);
 
 app.listen(process.env.PORT || '3000')
