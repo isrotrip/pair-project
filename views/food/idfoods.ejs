@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@dang Home</title>
+    <%- include('../partials/cssNavBar.ejs') %>
+</head>
+
+<body>
+    <%- include('../partials/navBar.ejs') %>
+    <h1> EDIT</h1>
+    <% data.forEach(e =>{ %>
+    <form action="/foods/edit/<%= e.id %>" method="POST">
+        <br>
+        name: <input type="text" name="name" value="<%= e.name %>">
+        <br> originMadeFrom: <input type="text" name="originMadeFrom" value="<%= e.originMadeFrom %>"><br>
+        price: <input type="text" name="price" value="<%= e.price %>">
+        <br>
+
+        <br>
+
+        <button type="submit">Masukkan</button>
+        <% })%>
+
+
+
+    </form>
+
+</body>

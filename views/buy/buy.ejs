@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>@dang Home</title>
+  <%- include('../partials/cssNavBar.ejs') %>
+</head>
+
+<body>
+  <%- include('../partials/navBar.ejs') %>
+  <h1> DATA FOODS</h1>
+
+  <br>
+  <h3>daftar beli</h3>
+
+  <br>
+  <table border="2">
+    <tr>
+      <td>id</td>
+      <td>name</td>
+      <td>origin</td>
+      <td>prince</td>
+      <td>rating</td>
+      <td>amount</td>
+      <td>rating</td>
+      <td>buy</td>
+
+    </tr>
+    <% data.forEach(e =>{ %>
+    <tr>
+
+    <tr>
+      <td>
+        <%= e.id%>
+      </td>
+      <td>
+        <%= e.name%>
+      </td>
+      <td>
+        <%= e.originMadeFrom%>
+      </td>
+      <td>
+        <%= e.price %>
+      </td>
+      <td>
+        <%= e.rating %>
+      </td>
+      <form action="/buy/<%=e.id%>"  method="POST">
+        <td>
+          <input type="text" name="amount" min="0" value="0">
+        </td>
+        <td>
+          <input type="number" min="0" max="5" name="rating" value="0">
+        </td>
+        <td>
+          <input type="submit" value="buy">
+        </td>
+      </form>
+      
+    </tr>
+    <% })%>
+
+  </table>
+  <a id="buy" href="buy/">buy</a>
+
+</body>
