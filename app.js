@@ -40,6 +40,4 @@ app.use('/logout', logout);
 app.use('/delete', del);
 app.use('/filter', filter);
 
-app.listen(port, () => {
-  console.log(`the connection is on the port ${port}`);
-})
+app.listen(process.env.PORT || '3000')
